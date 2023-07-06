@@ -31,6 +31,9 @@
 from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg, LeggedRobotCfgPPO
 
 class A1RoughCfg( LeggedRobotCfg ):
+    class env( LeggedRobotCfg.env ):
+        num_envs = 4096
+
     class init_state( LeggedRobotCfg.init_state ):
         pos = [0.0, 0.0, 0.42] # x,y,z [m]
         default_joint_angles = { # = target angles [rad] when action = 0.0
@@ -82,4 +85,17 @@ class A1RoughCfgPPO( LeggedRobotCfgPPO ):
         run_name = ''
         experiment_name = 'rough_a1'
 
+
+class A1FlatCfg( A1RoughCfg ):
+    class env( A1RoughCfg.env ):
+        # num_envs = 512
+        num_observations = 48
   
+    class terrain( A1RoughCfg.terrain ):
+        mesh_type = 'plane'
+        measure_heights = False
+
+class A1FlatCfgPPO( A1RoughCfgPPO ):
+    class runner( A1RoughCfgPPO.runner ):
+        experiment_name = 'flat_a1'
+        max_iterations = 500
