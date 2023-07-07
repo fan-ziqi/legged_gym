@@ -81,18 +81,18 @@ class CyberdogRoughCfg( LeggedRobotCfg ):
         foot_name = "foot"
         penalize_contacts_on = ["thigh", "calf"]
         terminate_after_contacts_on = ["base", "hip"]
-        self_collisions = 1 # 1 to disable, 0 to enable...bitwise filter
+        self_collisions = 0 # 1 to disable, 0 to enable...bitwise filter
         # flip_visual_attachments = False
-  
+
     class rewards( LeggedRobotCfg.rewards ):
         soft_dof_pos_limit = 0.9
         base_height_target = 0.30
         class scales( LeggedRobotCfg.rewards.scales ):
             torques = -0.0002
-            feet_air_time =  2.0
+            feet_air_time =  1.0
             base_height = 1.0
-            tracking_lin_vel = 2.0
-            stand_still = -2.0
+            tracking_lin_vel = 1.0
+            stand_still = -1.0
 
     class commands( LeggedRobotCfg.commands ):
         curriculum = False
@@ -155,6 +155,7 @@ class CyberdogMeihuaCfg( CyberdogRoughCfg ):
         num_observations = 363 # 观测空间的维度
     
     class terrain( CyberdogRoughCfg.terrain ):
+        curriculum = False
         terrain_proportions = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0] # 梅花桩
         measured_points_x = [-1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] # 测量点的x位置 1.4mx2.0m rectangle (without center line)
         measured_points_y = [-0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7] # 测量点的y位置
@@ -165,14 +166,14 @@ class CyberdogMeihuaCfg( CyberdogRoughCfg ):
         class scales( CyberdogRoughCfg.rewards.scales ):
             torques = -0.0002
             feet_air_time =  2.0
-            base_height = 1.0
+            base_height = 2.0
             tracking_lin_vel = 2.0
             stand_still = -2.0
 
     class commands( CyberdogRoughCfg.commands ):
-        curriculum = True
+        curriculum = False
         class ranges( CyberdogRoughCfg.commands.ranges ):
-            lin_vel_x = [-0.0, 2.0] # min max [m/s]
+            lin_vel_x = [-0.0, 0.5] # min max [m/s]
             lin_vel_y = [-0.0, 0.0]   # min max [m/s]
             ang_vel_yaw = [-0.0, 0.0]    # min max [rad/s]
             heading = [-3.14, 3.14]
@@ -185,5 +186,5 @@ class CyberdogMeihuaCfgPPO( CyberdogRoughCfgPPO ):
     class runner( CyberdogRoughCfgPPO.runner ):
         run_name = 'meihua'
         experiment_name = 'rough_cyberdog'
-        max_iterations = 2000
+        max_iterations = 1500
 
