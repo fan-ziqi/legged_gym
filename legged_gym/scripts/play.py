@@ -43,13 +43,19 @@ def play(args):
     env_cfg, train_cfg = task_registry.get_cfgs(name=args.task)
     # override some parameters for testing
     env_cfg.env.num_envs = min(env_cfg.env.num_envs, 20)
-    env_cfg.terrain.num_rows = 2
-    env_cfg.terrain.num_cols = 2
-    env_cfg.terrain.curriculum = False
+    env_cfg.terrain.num_rows = 10
+    env_cfg.terrain.num_cols = 1
+    env_cfg.terrain.curriculum = True
     env_cfg.noise.add_noise = False
     env_cfg.domain_rand.randomize_friction = False
     env_cfg.domain_rand.push_robots = False
+
     env_cfg.sim.physx.max_gpu_contact_pairs = 2**23 # Prevent GPU memory from exceeding
+    # env_cfg.commands.ranges.lin_vel_x = [1.5, 1.5] # min max [m/s]
+    # env_cfg.commands.ranges.lin_vel_y = [-0.0, 0.0]   # min max [m/s]
+    # env_cfg.commands.ranges.ang_vel_yaw = [-0.0, 0.0]    # min max [rad/s]
+    # env_cfg.commands.ranges.heading = [-3.14, 3.14]
+    env_cfg.commands.heading_command = False
 
     # prepare environment
     env, _ = task_registry.make_env(name=args.task, args=args, env_cfg=env_cfg)
