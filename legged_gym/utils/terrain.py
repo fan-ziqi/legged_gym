@@ -130,8 +130,10 @@ class Terrain:
             if choice<self.proportions[2]:
                 step_height *= -1
             # terrain_utils.pyramid_stairs_terrain(terrain, step_width=0.31, step_height=step_height, platform_size=3.)
-            terrain_utils.pyramid_stairs_terrain(terrain, step_width=4.0, step_height=-(0.1 + 0.9 * difficulty), platform_size=12.)
-            # terrain_utils.stairs_terrain(terrain, step_width=5.0, step_height=1.0)
+            terrain_utils.pyramid_stairs_terrain(terrain, step_width=4.0, step_height=-(0.5 + 0.5 * difficulty), platform_size=12.) #1m
+            # terrain_utils.pyramid_stairs_terrain(terrain, step_width=4.0, step_height=-(0.3 + 0.2 * difficulty), platform_size=12.) #1m
+            # terrain_utils.pyramid_stairs_terrain(terrain, step_width=2.0, step_height=-(0.5 + 0.3 * difficulty), platform_size=5.) #1m
+            # terrain_utils.stairs_terrain(terrain, step_width=5.0, step_height=0.5)
         elif choice < self.proportions[4]:
             num_rectangles = 20
             rectangle_min_size = 1.

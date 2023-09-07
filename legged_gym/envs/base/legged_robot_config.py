@@ -39,6 +39,8 @@ class LeggedRobotCfg(BaseConfig):
         env_spacing = 3.  # 环境之间的间隔距离 not used with heightfields/trimeshes 
         send_timeouts = True # 当训练环境的步骤超过指定的时间限制时，算法可以接收到超时信号 send time out information to the algorithm
         episode_length_s = 20 # 每个回合的最大持续时间 episode length in seconds 
+        reference_state_initialization = False # initialize state from reference data
+        include_history_steps = None  # Number of steps of history to include.
 
     class terrain:
         mesh_type = 'trimesh' # 地形类型 "heightfield" # none, plane, heightfield or trimesh
@@ -126,6 +128,9 @@ class LeggedRobotCfg(BaseConfig):
         push_robots = True # 是否对机器人施加推力
         push_interval_s = 15 # 推力之间的时间间隔
         max_push_vel_xy = 1. # 推力的最大xy平面速度
+        randomize_gains = False
+        stiffness_multiplier_range = [0.9, 1.1]
+        damping_multiplier_range = [0.9, 1.1]
 
     class rewards:
         class scales: # 奖励函数中各项的权重
