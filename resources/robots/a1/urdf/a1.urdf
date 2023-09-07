@@ -16,7 +16,6 @@
     <color rgba="0.913725490196 0.913725490196 0.847058823529 1.0"/>
   </material>
   <material name="orange">
-    <!-- <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/> -->
     <color rgba="0.12 0.15 0.2 1.0"/>
   </material>
   <material name="brown">
@@ -28,6 +27,7 @@
   <material name="white">
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
+
   <link name="base">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
