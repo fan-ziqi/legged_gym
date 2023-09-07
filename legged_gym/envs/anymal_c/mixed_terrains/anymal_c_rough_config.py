@@ -32,14 +32,18 @@ from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg, LeggedRobot
 
 class AnymalCRoughCfg( LeggedRobotCfg ):
     class env( LeggedRobotCfg.env ):
-        # num_envs = 1
+        num_envs = 4096
         num_actions = 12
 
     class terrain( LeggedRobotCfg.terrain ):
         mesh_type = 'trimesh'
-        terrain_proportions = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+        terrain_proportions = [0.1, 0.1, 0.3, 0.3, 0.2]
+        # terrain_proportions = [0.1, 0.1, 0.0, 0.7, 0.1]
+        # terrain_proportions = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0] # 1m
+        terrain_length = 16 # 地形的长度
+        terrain_width = 16 # 地形的宽度
         num_rows= 10 # number of terrain rows (levels)
-        num_cols = 20 # number of terrain cols (types)
+        num_cols = 10 # number of terrain cols (types)
 
     class init_state( LeggedRobotCfg.init_state ):
         pos = [0.0, 0.0, 0.6] # x,y,z [m]
@@ -88,10 +92,29 @@ class AnymalCRoughCfg( LeggedRobotCfg ):
         max_contact_force = 500.
         only_positive_rewards = True
         class scales( LeggedRobotCfg.rewards.scales ):
-            pass
+            torques = -0.00001
+            orientation = -0.0
+            feet_air_time =  1.5
+            base_height = -0.5
+            tracking_lin_vel = 1.5
+            tracking_ang_vel = 0.5
+            stand_still = -2.0
+            lin_vel_z = -0.5
+            # pass
+
+    class commands( LeggedRobotCfg.commands ):
+        curriculum = False
+        resampling_time = 4.
+        heading_command = False
+        class ranges( LeggedRobotCfg.commands.ranges ):
+            lin_vel_x = [0.5, 1.0] # min max [m/s]
+            lin_vel_y = [-0.0, 0.0]   # min max [m/s]
+            ang_vel_yaw = [-0.0, 0.0]    # min max [rad/s]
+            heading = [-3.14, 3.14]
 
 class AnymalCRoughCfgPPO( LeggedRobotCfgPPO ):
     class runner( LeggedRobotCfgPPO.runner ):
-        run_name = ''
+        run_name = 'rough'
         experiment_name = 'rough_anymal_c'
         load_run = -1
+        max_iterations = 1000
