@@ -5,6 +5,33 @@
 <!-- =================================================================================== -->
 <robot name="cyberdog2_description">
   <!-- <xacro:include filename="gazebo.xacro" /> -->
+  <material name="black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+  <material name="green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+  <material name="silver">
+    <color rgba="0.913725490196 0.913725490196 0.847058823529 1.0"/>
+  </material>
+  <material name="orange">
+    <color rgba="0.12 0.15 0.2 1.0"/>
+  </material>
+  <material name="brown">
+    <color rgba="0.870588235294 0.811764705882 0.764705882353 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
   <link name="base">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -159,7 +186,7 @@
     <parent link="trunk"/>
     <child link="FR_hip"/>
     <axis xyz="1 0 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-0.6806784082777885" upper="0.6806784082777885" velocity="30.9971"/>
   </joint>
   <link name="FR_hip">
@@ -182,38 +209,38 @@
       <inertia ixx="0.00019" ixy="2.7e-05" ixz="-3.44e-07" iyy="0.000276" iyz="-1.95e-06" izz="0.000233"/>
     </inertial>
   </link>
-  <joint name="FR_hip_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.0642303 0 0"/>
-    <parent link="FR_hip"/>
-    <child link="FR_hip_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_hip_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="${-abad_rotor_offset*front_hind} 0 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_hip_rotor" />
+        </joint> -->
   <!-- this link is only for abad rotor inertial -->
-  <link name="FR_hip_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="FR_hip_fixed" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.059 0"/>
-    <parent link="FR_hip"/>
-    <child link="FR_thigh_shoulder"/>
-  </joint>
-  <link name="FR_thigh_shoulder">
-    <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.035" radius="0.039"/>
-      </geometry>
-    </collision>
-  </link>
+  <!-- <link name="${name}_hip_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_hip_fixed" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${(hip_offset-hip_shoulder_length)*mirror} 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_thigh_shoulder" />
+        </joint> -->
+  <!-- <link name="${name}_thigh_shoulder">
+            <collision>
+                <origin rpy="${PI/2.0} 0 0" xyz="0 0 0" />
+                <geometry>
+                    <cylinder length="${hip_shoulder_length}" radius="${hip_shoulder_radius}" />
+                </geometry>
+            </collision>
+        </link> -->
   <joint name="FR_thigh_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 -0.094 0"/>
     <parent link="FR_hip"/>
     <child link="FR_thigh"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-1.3264502315156903" upper="2.792526803190927" velocity="30.9971"/>
   </joint>
   <link name="FR_thigh">
@@ -236,38 +263,38 @@
       <inertia ixx="0.00101" ixy="-2.23e-05" ixz="-3.85e-05" iyy="0.000983" iyz="-0.000199" izz="0.000347"/>
     </inertial>
   </link>
-  <joint name="FR_thigh_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.07577 0"/>
-    <parent link="FR_thigh"/>
-    <child link="FR_thigh_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_thigh_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${hip_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_thigh_rotor" />
+        </joint> -->
   <!-- this link is only for hip rotor inertial -->
-  <link name="FR_thigh_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="FR_calf_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0342303 0"/>
-    <parent link="FR_thigh"/>
-    <child link="FR_calf_rotor"/>
-  </joint>
+  <!-- <link name="${name}_thigh_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_calf_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${knee_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_calf_rotor" />
+        </joint> -->
   <!-- this link is only for knee rotor inertial -->
-  <link name="FR_calf_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
+  <!-- <link name="${name}_calf_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
   <joint name="FR_calf_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 -0.12"/>
     <parent link="FR_thigh"/>
     <child link="FR_calf"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-2.5307274153917776" upper="-0.5235987755982988" velocity="30.9971"/>
   </joint>
   <link name="FR_calf">
@@ -284,27 +311,27 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <collision name="FR_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision>
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
       <inertia ixx="0.000668" ixy="3e-09" ixz="2.37e-05" iyy="0.000674" iyz="6.03e-07" izz="1.54e-05"/>
     </inertial>
   </link>
-  <joint name="FR_foot_fixed" type="fixed">
+  <joint dont_collapse="true" name="FR_foot_fixed" type="fixed">
     <origin rpy="0 0 0" xyz="0.0055 0 -0.17390999999999998"/>
     <parent link="FR_calf"/>
     <child link="FR_foot"/>
@@ -367,7 +394,7 @@
     <parent link="trunk"/>
     <child link="FL_hip"/>
     <axis xyz="1 0 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-0.6806784082777885" upper="0.6806784082777885" velocity="30.9971"/>
   </joint>
   <link name="FL_hip">
@@ -390,38 +417,38 @@
       <inertia ixx="0.00019" ixy="-2.7e-05" ixz="-3.44e-07" iyy="0.000276" iyz="1.95e-06" izz="0.000233"/>
     </inertial>
   </link>
-  <joint name="FL_hip_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.0642303 0 0"/>
-    <parent link="FL_hip"/>
-    <child link="FL_hip_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_hip_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="${-abad_rotor_offset*front_hind} 0 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_hip_rotor" />
+        </joint> -->
   <!-- this link is only for abad rotor inertial -->
-  <link name="FL_hip_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="FL_hip_fixed" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.059 0"/>
-    <parent link="FL_hip"/>
-    <child link="FL_thigh_shoulder"/>
-  </joint>
-  <link name="FL_thigh_shoulder">
-    <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.035" radius="0.039"/>
-      </geometry>
-    </collision>
-  </link>
+  <!-- <link name="${name}_hip_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_hip_fixed" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${(hip_offset-hip_shoulder_length)*mirror} 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_thigh_shoulder" />
+        </joint> -->
+  <!-- <link name="${name}_thigh_shoulder">
+            <collision>
+                <origin rpy="${PI/2.0} 0 0" xyz="0 0 0" />
+                <geometry>
+                    <cylinder length="${hip_shoulder_length}" radius="${hip_shoulder_radius}" />
+                </geometry>
+            </collision>
+        </link> -->
   <joint name="FL_thigh_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0.094 0"/>
     <parent link="FL_hip"/>
     <child link="FL_thigh"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-1.3264502315156903" upper="2.792526803190927" velocity="30.9971"/>
   </joint>
   <link name="FL_thigh">
@@ -444,38 +471,38 @@
       <inertia ixx="0.00101" ixy="2.23e-05" ixz="-3.85e-05" iyy="0.000983" iyz="0.000199" izz="0.000347"/>
     </inertial>
   </link>
-  <joint name="FL_thigh_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.07577 0"/>
-    <parent link="FL_thigh"/>
-    <child link="FL_thigh_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_thigh_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${hip_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_thigh_rotor" />
+        </joint> -->
   <!-- this link is only for hip rotor inertial -->
-  <link name="FL_thigh_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="FL_calf_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.0342303 0"/>
-    <parent link="FL_thigh"/>
-    <child link="FL_calf_rotor"/>
-  </joint>
+  <!-- <link name="${name}_thigh_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_calf_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${knee_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_calf_rotor" />
+        </joint> -->
   <!-- this link is only for knee rotor inertial -->
-  <link name="FL_calf_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
+  <!-- <link name="${name}_calf_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
   <joint name="FL_calf_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 -0.12"/>
     <parent link="FL_thigh"/>
     <child link="FL_calf"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-2.5307274153917776" upper="-0.5235987755982988" velocity="30.9971"/>
   </joint>
   <link name="FL_calf">
@@ -492,27 +519,27 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <collision name="FL_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision>
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
       <inertia ixx="0.000668" ixy="3e-09" ixz="2.37e-05" iyy="0.000674" iyz="6.03e-07" izz="1.54e-05"/>
     </inertial>
   </link>
-  <joint name="FL_foot_fixed" type="fixed">
+  <joint dont_collapse="true" name="FL_foot_fixed" type="fixed">
     <origin rpy="0 0 0" xyz="0.0055 0 -0.17390999999999998"/>
     <parent link="FL_calf"/>
     <child link="FL_foot"/>
@@ -575,7 +602,7 @@
     <parent link="trunk"/>
     <child link="RR_hip"/>
     <axis xyz="1 0 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-0.6806784082777885" upper="0.6806784082777885" velocity="30.9971"/>
   </joint>
   <link name="RR_hip">
@@ -598,38 +625,38 @@
       <inertia ixx="0.00019" ixy="-2.7e-05" ixz="3.44e-07" iyy="0.000276" iyz="-1.95e-06" izz="0.000233"/>
     </inertial>
   </link>
-  <joint name="RR_hip_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0.0642303 0 0"/>
-    <parent link="RR_hip"/>
-    <child link="RR_hip_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_hip_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="${-abad_rotor_offset*front_hind} 0 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_hip_rotor" />
+        </joint> -->
   <!-- this link is only for abad rotor inertial -->
-  <link name="RR_hip_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="RR_hip_fixed" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.059 0"/>
-    <parent link="RR_hip"/>
-    <child link="RR_thigh_shoulder"/>
-  </joint>
-  <link name="RR_thigh_shoulder">
-    <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.035" radius="0.039"/>
-      </geometry>
-    </collision>
-  </link>
+  <!-- <link name="${name}_hip_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_hip_fixed" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${(hip_offset-hip_shoulder_length)*mirror} 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_thigh_shoulder" />
+        </joint> -->
+  <!-- <link name="${name}_thigh_shoulder">
+            <collision>
+                <origin rpy="${PI/2.0} 0 0" xyz="0 0 0" />
+                <geometry>
+                    <cylinder length="${hip_shoulder_length}" radius="${hip_shoulder_radius}" />
+                </geometry>
+            </collision>
+        </link> -->
   <joint name="RR_thigh_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 -0.094 0"/>
     <parent link="RR_hip"/>
     <child link="RR_thigh"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-0.9773843811168246" upper="3.141592653589793" velocity="30.9971"/>
   </joint>
   <link name="RR_thigh">
@@ -652,38 +679,38 @@
       <inertia ixx="0.00101" ixy="-2.23e-05" ixz="-3.85e-05" iyy="0.000983" iyz="-0.000199" izz="0.000347"/>
     </inertial>
   </link>
-  <joint name="RR_thigh_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.07577 0"/>
-    <parent link="RR_thigh"/>
-    <child link="RR_thigh_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_thigh_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${hip_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_thigh_rotor" />
+        </joint> -->
   <!-- this link is only for hip rotor inertial -->
-  <link name="RR_thigh_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="RR_calf_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0342303 0"/>
-    <parent link="RR_thigh"/>
-    <child link="RR_calf_rotor"/>
-  </joint>
+  <!-- <link name="${name}_thigh_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_calf_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${knee_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_calf_rotor" />
+        </joint> -->
   <!-- this link is only for knee rotor inertial -->
-  <link name="RR_calf_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
+  <!-- <link name="${name}_calf_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
   <joint name="RR_calf_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 -0.12"/>
     <parent link="RR_thigh"/>
     <child link="RR_calf"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-2.5307274153917776" upper="-0.5235987755982988" velocity="30.9971"/>
   </joint>
   <link name="RR_calf">
@@ -700,27 +727,27 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <collision name="RR_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision>
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
       <inertia ixx="0.000668" ixy="3e-09" ixz="2.37e-05" iyy="0.000674" iyz="6.03e-07" izz="1.54e-05"/>
     </inertial>
   </link>
-  <joint name="RR_foot_fixed" type="fixed">
+  <joint dont_collapse="true" name="RR_foot_fixed" type="fixed">
     <origin rpy="0 0 0" xyz="0.0055 0 -0.17390999999999998"/>
     <parent link="RR_calf"/>
     <child link="RR_foot"/>
@@ -783,7 +810,7 @@
     <parent link="trunk"/>
     <child link="RL_hip"/>
     <axis xyz="1 0 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-0.6806784082777885" upper="0.6806784082777885" velocity="30.9971"/>
   </joint>
   <link name="RL_hip">
@@ -806,38 +833,38 @@
       <inertia ixx="0.00019" ixy="2.7e-05" ixz="3.44e-07" iyy="0.000276" iyz="1.95e-06" izz="0.000233"/>
     </inertial>
   </link>
-  <joint name="RL_hip_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0.0642303 0 0"/>
-    <parent link="RL_hip"/>
-    <child link="RL_hip_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_hip_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="${-abad_rotor_offset*front_hind} 0 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_hip_rotor" />
+        </joint> -->
   <!-- this link is only for abad rotor inertial -->
-  <link name="RL_hip_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="RL_hip_fixed" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.059 0"/>
-    <parent link="RL_hip"/>
-    <child link="RL_thigh_shoulder"/>
-  </joint>
-  <link name="RL_thigh_shoulder">
-    <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
-      <geometry>
-        <cylinder length="0.035" radius="0.039"/>
-      </geometry>
-    </collision>
-  </link>
+  <!-- <link name="${name}_hip_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_hip_fixed" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${(hip_offset-hip_shoulder_length)*mirror} 0" />
+            <parent link="${name}_hip" />
+            <child link="${name}_thigh_shoulder" />
+        </joint> -->
+  <!-- <link name="${name}_thigh_shoulder">
+            <collision>
+                <origin rpy="${PI/2.0} 0 0" xyz="0 0 0" />
+                <geometry>
+                    <cylinder length="${hip_shoulder_length}" radius="${hip_shoulder_radius}" />
+                </geometry>
+            </collision>
+        </link> -->
   <joint name="RL_thigh_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0.094 0"/>
     <parent link="RL_hip"/>
     <child link="RL_thigh"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-0.9773843811168246" upper="3.141592653589793" velocity="30.9971"/>
   </joint>
   <link name="RL_thigh">
@@ -860,38 +887,38 @@
       <inertia ixx="0.00101" ixy="2.23e-05" ixz="-3.85e-05" iyy="0.000983" iyz="0.000199" izz="0.000347"/>
     </inertial>
   </link>
-  <joint name="RL_thigh_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.07577 0"/>
-    <parent link="RL_thigh"/>
-    <child link="RL_thigh_rotor"/>
-  </joint>
+  <!-- <joint name="${name}_thigh_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${hip_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_thigh_rotor" />
+        </joint> -->
   <!-- this link is only for hip rotor inertial -->
-  <link name="RL_thigh_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
-  <joint name="RL_calf_rotor_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.0342303 0"/>
-    <parent link="RL_thigh"/>
-    <child link="RL_calf_rotor"/>
-  </joint>
+  <!-- <link name="${name}_thigh_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
+  <!-- <joint name="${name}_calf_rotor_fix" type="fixed">
+            <origin rpy="0 0 0" xyz="0 ${knee_rotor_offset*mirror} 0" />
+            <parent link="${name}_thigh" />
+            <child link="${name}_calf_rotor" />
+        </joint> -->
   <!-- this link is only for knee rotor inertial -->
-  <link name="RL_calf_rotor">
-    <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.0567"/>
-      <inertia ixx="2.53e-05" ixy="0" ixz="0" iyy="4.78e-05" iyz="0" izz="2.53e-05"/>
-    </inertial>
-  </link>
+  <!-- <link name="${name}_calf_rotor">
+            <inertial>
+                <origin rpy="0 0 0" xyz="${rotor_com_x} ${rotor_com_y} ${rotor_com_z}" />
+                <mass value="${rotor_mass}" />
+                <inertia ixx="${rotor_ixx}" ixy="${rotor_ixy}" ixz="${rotor_ixz}" iyy="${rotor_iyy}" iyz="${rotor_iyz}" izz="${rotor_izz}" />
+            </inertial>
+        </link> -->
   <joint name="RL_calf_joint" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 -0.12"/>
     <parent link="RL_thigh"/>
     <child link="RL_calf"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.01" friction="0.1"/>
+    <dynamics damping="0" friction="0"/>
     <limit effort="12.0001" lower="-2.5307274153917776" upper="-0.5235987755982988" velocity="30.9971"/>
   </joint>
   <link name="RL_calf">
@@ -908,27 +935,27 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <collision name="RL_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision>
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
       <inertia ixx="0.000668" ixy="3e-09" ixz="2.37e-05" iyy="0.000674" iyz="6.03e-07" izz="1.54e-05"/>
     </inertial>
   </link>
-  <joint name="RL_foot_fixed" type="fixed">
+  <joint dont_collapse="true" name="RL_foot_fixed" type="fixed">
     <origin rpy="0 0 0" xyz="0.0055 0 -0.17390999999999998"/>
     <parent link="RL_calf"/>
     <child link="RL_foot"/>

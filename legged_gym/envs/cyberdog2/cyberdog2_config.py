@@ -38,10 +38,10 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
     class control( LeggedRobotCfg.control ):
         # PD Drive parameters:
         control_type = 'P'
-        stiffness = {'joint': 20.}  # [N*m/rad]
+        stiffness = {'joint': 20.0}  # [N*m/rad]
         damping = {'joint': 0.5}     # [N*m*s/rad]
         # action scale: target angle = actionScale * action + defaultAngle
-        action_scale = 0.25
+        action_scale = 0.1
         # decimation: Number of control action updates @ sim DT per policy DT
         decimation = 4
 
@@ -55,14 +55,15 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
         # flip_visual_attachments = False
 
     class rewards( LeggedRobotCfg.rewards ):
-        soft_dof_pos_limit = 0.9
         base_height_target = 0.25
         class scales( LeggedRobotCfg.rewards.scales ):
-            torques = -0.0002
-            feet_air_time =  1.0
-            base_height = 1.0
-            tracking_lin_vel = 1.0
-            stand_still = -1.0
+            torques = -0.000005
+            feet_air_time =  0.1
+            base_height = -0.5
+            tracking_lin_vel = 2.0
+            tracking_ang_vel = 1.5
+            stand_still = -2.0
+            lin_vel_z = -3.0
 
     class commands( LeggedRobotCfg.commands ):
         curriculum = False
@@ -72,11 +73,6 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
             lin_vel_y = [-0.5, 0.5]   # min max [m/s]
             ang_vel_yaw = [-0.5, 0.5]    # min max [rad/s]
             heading = [-3.14, 3.14]
-
-            # lin_vel_x = [-0.0, 2.0] # min max [m/s]
-            # lin_vel_y = [-0.0, 0.0]   # min max [m/s]
-            # ang_vel_yaw = [-0.0, 0.0]    # min max [rad/s]
-            # heading = [-3.14, 3.14]
 
 class Cyberdog2RoughCfgPPO( LeggedRobotCfgPPO ):
     class algorithm( LeggedRobotCfgPPO.algorithm ):
@@ -88,7 +84,7 @@ class Cyberdog2RoughCfgPPO( LeggedRobotCfgPPO ):
         activation = 'elu' # can be elu, relu, selu, crelu, lrelu, tanh, sigmoid
 
     class runner( LeggedRobotCfgPPO.runner ):
-        run_name = ''
+        run_name = 'rough'
         experiment_name = 'rough_cyberdog2'
         max_iterations = 1500
 
@@ -96,7 +92,7 @@ class Cyberdog2RoughCfgPPO( LeggedRobotCfgPPO ):
 
 class Cyberdog2FlatCfg( Cyberdog2RoughCfg ):
     class env( Cyberdog2RoughCfg.env ):
-        num_envs = 512
+        num_envs = 4096
         num_observations = 48
   
     class terrain( Cyberdog2RoughCfg.terrain ):
@@ -104,13 +100,13 @@ class Cyberdog2FlatCfg( Cyberdog2RoughCfg ):
         measure_heights = False
     
     class asset( Cyberdog2RoughCfg.asset ):
-        self_collisions = 0 # 1 to disable, 0 to enable...bitwise filter
+        self_collisions = 1 # 1 to disable, 0 to enable...bitwise filter
 
 class Cyberdog2FlatCfgPPO( Cyberdog2RoughCfgPPO ):
     class runner( Cyberdog2RoughCfgPPO.runner ):
         run_name = 'flat'
         experiment_name = 'flat_cyberdog2'
-        max_iterations = 300
+        max_iterations = 500
 
 ########################################梅花桩########################################
 
