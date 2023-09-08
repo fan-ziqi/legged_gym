@@ -41,6 +41,8 @@ from .cassie.cassie_config import CassieRoughCfg, CassieRoughCfgPPO
 from .a1.a1_config import A1RoughCfg, A1RoughCfgPPO, A1FlatCfg, A1FlatCfgPPO
 from .a1.a1_amp_config import A1AMPCfg, A1AMPCfgPPO
 from .cyberdog.cyberdog_config import CyberdogRoughCfg, CyberdogRoughCfgPPO, CyberdogFlatCfg, CyberdogFlatCfgPPO, CyberdogMeihuaCfg, CyberdogMeihuaCfgPPO
+from .cyberdog2.cyberdog2_config import Cyberdog2RoughCfg, Cyberdog2RoughCfgPPO, Cyberdog2FlatCfg, Cyberdog2FlatCfgPPO, Cyberdog2MeihuaCfg, Cyberdog2MeihuaCfgPPO
+from .cyberdog2.cyberdog2_amp_config import Cyberdog2AMPCfg, Cyberdog2AMPCfgPPO
 # from .keti1.keti1_config import Keti1RoughCfg, Keti1RoughCfgPPO, Keti1FlatCfg, Keti1FlatCfgPPO
 # from .keti1.keti1_amp_config import Keti1AMPCfg, Keti1AMPCfgPPO
 # from .go1.go1_config import Go1RoughCfg, Go1RoughCfgPPO, Go1FlatCfg, Go1MrssNovel, Go1FlatCfgPPO, Go1FlatNoVelCfg, Go1FlatNoVelCfgPPO, Go1MrssNovelRough
@@ -60,6 +62,10 @@ task_registry.register( "cassie", Cassie, CassieRoughCfg(), CassieRoughCfgPPO() 
 task_registry.register( "cyberdog_rough", LeggedRobot, CyberdogRoughCfg(), CyberdogRoughCfgPPO() )
 task_registry.register( "cyberdog_flat", LeggedRobot, CyberdogFlatCfg(), CyberdogFlatCfgPPO() )
 task_registry.register( "cyberdog_meihua", LeggedRobot, CyberdogMeihuaCfg(), CyberdogMeihuaCfgPPO() )
+task_registry.register( "cyberdog2_rough", LeggedRobot, Cyberdog2RoughCfg(), Cyberdog2RoughCfgPPO() )
+task_registry.register( "cyberdog2_flat", LeggedRobot, Cyberdog2FlatCfg(), Cyberdog2FlatCfgPPO() )
+task_registry.register( "cyberdog2_meihua", LeggedRobot, Cyberdog2MeihuaCfg(), Cyberdog2MeihuaCfgPPO() )
+task_registry.register( "cyberdog2_amp", LeggedRobotAMP, Cyberdog2AMPCfg(), Cyberdog2AMPCfgPPO() )
 # task_registry.register( "keti1_rough", LeggedRobot, Keti1RoughCfg(), Keti1RoughCfgPPO() )
 # task_registry.register( "keti1_flat", LeggedRobot, Keti1FlatCfg(), Keti1FlatCfgPPO() )
 # task_registry.register( "keti1_amp", LeggedRobotAMP, Keti1AMPCfg(), Keti1AMPCfgPPO() )

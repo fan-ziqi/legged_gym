@@ -11,10 +11,16 @@ VISUALIZE_RETARGETING = True
 #     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
 
 
-URDF_FILENAME = "{LEGGED_GYM_ROOT_DIR}/resources/robots/keti1/urdf/keti1.urdf".format(
+# URDF_FILENAME = "{LEGGED_GYM_ROOT_DIR}/resources/robots/keti1/urdf/keti1.urdf".format(
+#     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
+
+# OUTPUT_DIR = "{LEGGED_GYM_ROOT_DIR}/datasets/mocap_motions_keti1".format(
+#     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
+
+URDF_FILENAME = "{LEGGED_GYM_ROOT_DIR}/resources/robots/cyberdog2/urdf/cyberdog2.urdf".format(
     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
 
-OUTPUT_DIR = "{LEGGED_GYM_ROOT_DIR}/datasets/mocap_motions_keti1".format(
+OUTPUT_DIR = "{LEGGED_GYM_ROOT_DIR}/datasets/mocap_motions_cyberdog2".format(
     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
 
 
