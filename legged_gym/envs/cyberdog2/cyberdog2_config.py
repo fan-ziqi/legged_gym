@@ -41,7 +41,7 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
         stiffness = {'joint': 20.0}  # [N*m/rad]
         damping = {'joint': 0.5}     # [N*m*s/rad]
         # action scale: target angle = actionScale * action + defaultAngle
-        action_scale = 0.1
+        action_scale = 0.25
         # decimation: Number of control action updates @ sim DT per policy DT
         decimation = 4
 
@@ -58,12 +58,12 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
         base_height_target = 0.25
         class scales( LeggedRobotCfg.rewards.scales ):
             torques = -0.000005
-            feet_air_time =  0.1
+            feet_air_time =  1.5
             base_height = -0.5
             tracking_lin_vel = 2.0
             tracking_ang_vel = 1.5
             stand_still = -2.0
-            lin_vel_z = -3.0
+            lin_vel_z = -2.0
 
     class commands( LeggedRobotCfg.commands ):
         curriculum = False
