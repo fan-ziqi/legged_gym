@@ -70,34 +70,32 @@
       <inertia ixx="0.0185" ixy="-0.000173" ixz="-0.0102" iyy="0.0517" iyz="-2.83e-05" izz="0.0483"/>
     </inertial>
   </link>
-  <!-- <joint name="imu_joint" type="fixed">
-        <parent link="body" />
-        <child link="imu_link" />
-        <origin rpy="0 0 0" xyz="33.4e-3 -17.2765e-3 51.0469e-3" />
-    </joint>
-
-    <link name="imu_link">
-        <inertial>
-            <mass value="0.001" />
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
-        </inertial>
-        <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-                <box size="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-                <box size=".001 .001 .001" />
-            </geometry>
-        </collision>
-    </link>
-
-    <joint name="scan_joint" type="fixed">
-        <parent link="body" />
+  <joint name="imu_joint" type="fixed">
+    <parent link="trunk"/>
+    <child link="imu_link"/>
+    <origin rpy="0 0 0" xyz="33.4e-3 -17.2765e-3 51.0469e-3"/>
+  </joint>
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- <joint name="scan_joint" type="fixed">
+        <parent link="trunk" />
         <child link="lidar_link" />
         <origin rpy="0 0 0" xyz="0.21425 0 0.0908" />
     </joint>
@@ -111,7 +109,7 @@
     </link>
 
     <joint name="D435_camera_joint" type="fixed">
-        <parent link="body" />
+        <parent link="trunk" />
         <child link="D435_camera_link" />
         <origin rpy="0 0 0" xyz="271.994e-3 25e-3 114.912e-3" />
     </joint>
@@ -137,7 +135,7 @@
     </link>
 
     <joint name="RGB_camera_joint" type="fixed">
-        <parent link="body" />
+        <parent link="trunk" />
         <child link="RGB_camera_link" />
         <origin rpy="0 0 0" xyz="275.76e-3 0 125.794e-3" />
     </joint>
@@ -163,7 +161,7 @@
     </link>
 
     <joint name="AI_camera_joint" type="fixed">
-        <parent link="body" />
+        <parent link="trunk" />
         <child link="AI_camera_link" />
         <origin rpy="0 0 0" xyz="290.228e-3 0 147.420e-3" />
     </joint>
@@ -317,20 +315,20 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <!-- <collision name="FR_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision> -->
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
@@ -525,20 +523,20 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <!-- <collision name="FL_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision> -->
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
@@ -733,20 +731,20 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <!-- <collision name="RR_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision> -->
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>
@@ -941,20 +939,20 @@
         <box size="0.016 0.016 0.18341"/>
       </geometry>
     </collision>
-    <!-- <collision name="RL_calf_rubber">
-      <origin rpy="0 3.141592653589793 0" xyz="-0.01 0 -0.007"/>
-      <geometry>
-        <sphere radius="0.016"/>
-      </geometry>
-      <surface>
-        <contact>
-          <ode>
-            <max_vel>0.00001</max_vel>
-            <min_depth>0.0</min_depth>
-          </ode>
-        </contact>
-      </surface>
-    </collision> -->
+    <!-- <collision name="${name}_calf_rubber">
+                <origin rpy="0 ${PI} 0" xyz="${-knee_rubber/2.0} 0 -0.007" />
+                <geometry>
+                    <sphere radius="0.016" />
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <max_vel>0.00001</max_vel>
+                            <min_depth>0.0</min_depth>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision> -->
     <inertial>
       <origin rpy="0 0 0" xyz="0.0006 -4.72e-05 -0.0893"/>
       <mass value="0.116"/>

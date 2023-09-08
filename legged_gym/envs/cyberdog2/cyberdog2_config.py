@@ -24,15 +24,15 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
             'FR_hip_joint': -0.0 ,  # [rad]
             'RR_hip_joint': -0.0,   # [rad]
 
-            'FL_thigh_joint': 0.8,     # [rad]
-            'RL_thigh_joint': 1.0,   # [rad]
-            'FR_thigh_joint': 0.8,     # [rad]
-            'RR_thigh_joint': 1.0,   # [rad]
+            'FL_thigh_joint': 0.66,     # [rad]
+            'RL_thigh_joint': 0.66,   # [rad]
+            'FR_thigh_joint': 0.66,     # [rad]
+            'RR_thigh_joint': 0.66,   # [rad]
 
-            'FL_calf_joint': -1.5,   # [rad]
-            'RL_calf_joint': -1.5,    # [rad]
-            'FR_calf_joint': -1.5,  # [rad]
-            'RR_calf_joint': -1.5,    # [rad]
+            'FL_calf_joint': -1.17,   # [rad]
+            'RL_calf_joint': -1.17,    # [rad]
+            'FR_calf_joint': -1.17,  # [rad]
+            'RR_calf_joint': -1.17,    # [rad]
         }
 
     class control( LeggedRobotCfg.control ):

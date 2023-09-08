@@ -24,7 +24,7 @@ OUTPUT_DIR = "{LEGGED_GYM_ROOT_DIR}/datasets/mocap_motions_cyberdog2".format(
     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
 
 
-REF_POS_SCALE = 1.0 #缩放
+REF_POS_SCALE = 0.8 #缩放
 # INIT_POS = np.array([0, 0, 0.32]) # a1
 # INIT_POS = np.array([0, 0, 0.9]) # keti1
 INIT_POS = np.array([0, 0, 0.3]) # cyberdog2
@@ -34,14 +34,14 @@ INIT_ROT = np.array([0, 0, 0, 1.0])
 # SIM_HIP_JOINT_IDS = [2, 7, 12, 17]
 SIM_TOE_JOINT_IDS = [11, 6, 21, 16]
 SIM_HIP_JOINT_IDS = [7, 2, 17, 12]
-SIM_ROOT_OFFSET = np.array([0, 0, -0.04])
+SIM_ROOT_OFFSET = np.array([0, 0, -0.05])
 SIM_TOE_OFFSET_LOCAL = [
-    np.array([0, 0.35, 0.0]),
-    np.array([0, -0.35, 0.0]),
-    np.array([0, 0.35, 0.0]),
-    np.array([0, -0.35, 0.0])
+    np.array([0, 0.13, 0.0]),
+    np.array([0, -0.13, 0.0]),
+    np.array([0, 0.13, 0.0]),
+    np.array([0, -0.13, 0.0])
 ]
-TOE_HEIGHT_OFFSET = 0.1
+TOE_HEIGHT_OFFSET = 0.05
 
 DEFAULT_JOINT_POSE = np.array([0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8])
 JOINT_DAMPING = [0.1, 0.05, 0.01,
