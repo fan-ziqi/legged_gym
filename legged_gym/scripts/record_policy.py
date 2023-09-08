@@ -76,10 +76,10 @@ def play(args):
         print('Exported policy as jit script to: ', path)
 
     camera_rot = 0
-    camera_rot_per_sec = np.pi / 6
+    camera_rot_per_sec = np.pi / 12
     img_idx = 0
 
-    video_duration = 2
+    video_duration = 5
     num_frames = int(video_duration / env.dt)
     print(f'gathering {num_frames} frames')
     video = None
@@ -92,7 +92,7 @@ def play(args):
         # Reset camera position.
         look_at = np.array(env.root_states[0, :3].cpu(), dtype=np.float64)
         camera_rot = (camera_rot + camera_rot_per_sec * env.dt) % (2 * np.pi)
-        camera_relative_position = 5 * np.array([np.cos(camera_rot), np.sin(camera_rot), 0.6])
+        camera_relative_position = 3 * np.array([np.cos(camera_rot), np.sin(camera_rot), 0.2])
         env.set_camera(look_at + camera_relative_position, look_at)
 
         if RECORD_FRAMES:
