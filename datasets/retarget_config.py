@@ -24,9 +24,10 @@ OUTPUT_DIR = "{LEGGED_GYM_ROOT_DIR}/datasets/mocap_motions_cyberdog2".format(
     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
 
 
-REF_POS_SCALE = 2.0 #缩放
-# INIT_POS = np.array([0, 0, 0.32])
-INIT_POS = np.array([0, 0, 0.9])
+REF_POS_SCALE = 1.0 #缩放
+# INIT_POS = np.array([0, 0, 0.32]) # a1
+# INIT_POS = np.array([0, 0, 0.9]) # keti1
+INIT_POS = np.array([0, 0, 0.3]) # cyberdog2
 INIT_ROT = np.array([0, 0, 0, 1.0])
 
 # SIM_TOE_JOINT_IDS = [6, 11, 16, 21]

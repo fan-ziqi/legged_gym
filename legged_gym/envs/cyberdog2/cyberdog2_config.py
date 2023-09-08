@@ -17,7 +17,7 @@ class Cyberdog2RoughCfg( LeggedRobotCfg ):
         # measured_points_y = [-0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7] # 测量点的y位置
 
     class init_state( LeggedRobotCfg.init_state ):
-        pos = [0.0, 0.0, 0.40] # x,y,z [m]
+        pos = [0.0, 0.0, 0.30] # x,y,z [m]
         default_joint_angles = { # = target angles [rad] when action = 0.0
             'FL_hip_joint': 0.0,   # [rad]
             'RL_hip_joint': 0.0,   # [rad]
