@@ -167,7 +167,7 @@ def set_angular_vel_pos(angular_vel, robot_idx, unique_id=None):
 
 
 def build_markers(num_markers, special_idx, special_colors):
-  marker_radius = 0.02
+  marker_radius = 0.01
   markers = []
   for i in range(num_markers):
     if i in special_idx:

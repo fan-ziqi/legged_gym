@@ -56,7 +56,7 @@ chain_foot_rr = pk.build_serial_chain_from_urdf(
 
 
 def build_markers(num_markers):
-  marker_radius = 0.02
+  marker_radius = 0.03
 
   markers = []
   for i in range(num_markers):
@@ -233,6 +233,10 @@ def retarget_root_pose(ref_joint_pos):
 def retarget_pose(robot, default_pose, ref_joint_pos):
   # 获取关节限制
   joint_lim_low, joint_lim_high = get_joint_limits(robot)
+  joint_lim_low = [i * -1 for i in joint_lim_high]
+  joint_lim_high = [i * -1 for i in joint_lim_high]
+  # print(joint_lim_low)
+  # print(joint_lim_high)
 
   root_pos, root_rot = retarget_root_pose(ref_joint_pos)
   root_pos += config.SIM_ROOT_OFFSET
@@ -271,8 +275,8 @@ def retarget_pose(robot, default_pose, ref_joint_pos):
       config.SIM_TOE_JOINT_IDS,
       tar_toe_pos,
       jointDamping=config.JOINT_DAMPING,
-      # lowerLimits=joint_lim_low,
-      # upperLimits=joint_lim_high,
+      lowerLimits=joint_lim_low,
+      upperLimits=joint_lim_high,
       restPoses=default_pose)
   joint_pose = np.array(joint_pose)
   print(joint_pose)

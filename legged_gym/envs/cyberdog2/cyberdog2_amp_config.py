@@ -60,12 +60,12 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
     class control( LeggedRobotCfg.control ):
         # PD Drive parameters:
         control_type = 'P'
-        stiffness = {'joint': 25.}  # [N*m/rad]
-        damping = {'joint': 0.8}     # [N*m*s/rad]
+        stiffness = {'joint': 40.}  # [N*m/rad]
+        damping = {'joint': 0.5}     # [N*m*s/rad]
         # action scale: target angle = actionScale * action + defaultAngle
         action_scale = 0.25
         # decimation: Number of control action updates @ sim DT per policy DT
-        decimation = 6
+        decimation = 4
 
     class asset( LeggedRobotCfg.asset ):
         file = '{LEGGED_GYM_ROOT_DIR}/resources/robots/cyberdog2/urdf/cyberdog2.urdf'
@@ -77,28 +77,28 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         self_collisions = 1 # 1 to disable, 0 to enable...bitwise filter
         # flip_visual_attachments = False
   
-    class domain_rand:
-        randomize_friction = True
-        friction_range = [0.25, 1.75]
-        randomize_base_mass = True
-        added_mass_range = [-1., 1.]
-        push_robots = True
-        push_interval_s = 15
-        max_push_vel_xy = 1.0
-        randomize_gains = True
-        stiffness_multiplier_range = [0.9, 1.1]
-        damping_multiplier_range = [0.9, 1.1]
+    # class domain_rand:
+    #     randomize_friction = True
+    #     friction_range = [0.25, 1.75]
+    #     randomize_base_mass = True
+    #     added_mass_range = [-1., 1.]
+    #     push_robots = True
+    #     push_interval_s = 15
+    #     max_push_vel_xy = 1.0
+    #     randomize_gains = True
+    #     stiffness_multiplier_range = [0.9, 1.1]
+    #     damping_multiplier_range = [0.9, 1.1]
 
-    class noise:
-        add_noise = True
-        noise_level = 1.0 # scales other values
-        class noise_scales:
-            dof_pos = 0.03
-            dof_vel = 1.5
-            lin_vel = 0.1
-            ang_vel = 0.3
-            gravity = 0.05
-            height_measurements = 0.1
+    # class noise:
+    #     add_noise = True
+    #     noise_level = 1.0 # scales other values
+    #     class noise_scales:
+    #         dof_pos = 0.03
+    #         dof_vel = 1.5
+    #         lin_vel = 0.1
+    #         ang_vel = 0.3
+    #         gravity = 0.05
+    #         height_measurements = 0.1
 
     class rewards( LeggedRobotCfg.rewards ):
         soft_dof_pos_limit = 0.9
@@ -128,7 +128,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         resampling_time = 10.
         heading_command = False
         class ranges:
-            lin_vel_x = [-0.8, 0.8] # min max [m/s]
+            lin_vel_x = [-0.5, 1.0] # min max [m/s]
             lin_vel_y = [-0.2, 0.2]   # min max [m/s]
             ang_vel_yaw = [-1.57, 1.57]    # min max [rad/s]
             heading = [-3.14, 3.14]
@@ -150,7 +150,7 @@ class Cyberdog2AMPCfgPPO( LeggedRobotCfgPPO ):
         experiment_name = 'amp_cyberdog2'
         algorithm_class_name = 'AMPPPO'
         policy_class_name = 'ActorCritic'
-        max_iterations = 2000
+        max_iterations = 10000
 
         amp_reward_coef = 2.0
         amp_motion_files = MOTION_FILES

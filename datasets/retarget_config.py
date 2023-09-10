@@ -24,7 +24,7 @@ OUTPUT_DIR = "{LEGGED_GYM_ROOT_DIR}/datasets/mocap_motions_cyberdog2".format(
     LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR)
 
 
-REF_POS_SCALE = 0.8 #缩放
+REF_POS_SCALE = 0.65 # 缩放系数,如果遇到关节限位异常，尝试将此数变小
 # INIT_POS = np.array([0, 0, 0.32]) # a1
 # INIT_POS = np.array([0, 0, 0.9]) # keti1
 INIT_POS = np.array([0, 0, 0.3]) # cyberdog2
@@ -34,16 +34,16 @@ INIT_ROT = np.array([0, 0, 0, 1.0])
 # SIM_HIP_JOINT_IDS = [2, 7, 12, 17]
 SIM_TOE_JOINT_IDS = [11, 6, 21, 16]
 SIM_HIP_JOINT_IDS = [7, 2, 17, 12]
-SIM_ROOT_OFFSET = np.array([0, 0, -0.05])
+SIM_ROOT_OFFSET = np.array([0, 0, 0.02])
 SIM_TOE_OFFSET_LOCAL = [
-    np.array([0, 0.13, 0.0]),
-    np.array([0, -0.13, 0.0]),
-    np.array([0, 0.13, 0.0]),
-    np.array([0, -0.13, 0.0])
+    np.array([0, 0.12, 0.0]),
+    np.array([0, -0.12, 0.0]),
+    np.array([0, 0.12, 0.0]),
+    np.array([0, -0.12, 0.0])
 ]
-TOE_HEIGHT_OFFSET = 0.05
+TOE_HEIGHT_OFFSET = 0.1
 
-DEFAULT_JOINT_POSE = np.array([0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8, 0, 0.9, -1.8])
+DEFAULT_JOINT_POSE = np.array([0, 0.66, -1.17, 0, 0.66, -1.17, 0, 0.66, -1.17, 0, 0.66, -1.17])
 JOINT_DAMPING = [0.1, 0.05, 0.01,
                  0.1, 0.05, 0.01,
                  0.1, 0.05, 0.01,
@@ -61,67 +61,67 @@ MOCAP_MOTIONS = [
     [
         "pace0",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk00_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 162, 201, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 200, 400, 1.3
     ],
     [
         "pace1",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk00_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 201, 400, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 200, 400, 1.3
     ],
     [
         "pace2",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk00_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1.3
     ],
     [
         "trot0",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk03_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 448, 481, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 300, 500, 1.5
     ],
     [
         "trot1",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk03_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1.5
     ],
     [
         "trot2",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_run04_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 480, 663, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 500, 700, 1.5
     ],
     [
         "canter0",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_run00_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 430, 480, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1
     ],
     [
         "canter1",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_run00_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 380, 430, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1
     ],
     [
         "canter2",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_run00_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 480, 566, 1
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 400, 600, 1
     ],
     [
         "right_turn0",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk09_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 1085, 1124, 1.5
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 1000, 1200, 1.0
     ],
     [
         "right_turn1",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk09_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 560, 670, 1.5
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 500, 700, 1.0
     ],
     [
         "left_turn0",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk09_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 2404, 2450, 1.5
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 2300, 2500, 1.0
     ],
     [
         "left_turn1",
         "{LEGGED_GYM_ROOT_DIR}/datasets/keypoint_datasets/ai4animation/dog_walk09_joint_pos.txt".format(
-            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 120, 220, 1.5
+            LEGGED_GYM_ROOT_DIR=LEGGED_GYM_ROOT_DIR), 100, 300, 1.0
     ]
 ]
 
