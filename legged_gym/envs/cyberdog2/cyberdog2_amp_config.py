@@ -60,7 +60,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
     class control( LeggedRobotCfg.control ):
         # PD Drive parameters:
         control_type = 'P'
-        stiffness = {'joint': 40.}  # [N*m/rad]
+        stiffness = {'joint': 20.}  # [N*m/rad]
         damping = {'joint': 0.5}     # [N*m*s/rad]
         # action scale: target angle = actionScale * action + defaultAngle
         action_scale = 0.25
@@ -72,8 +72,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         name = "cyberdog2"
         foot_name = "foot"
         penalize_contacts_on = ["thigh", "calf"]
-        terminate_after_contacts_on = [
-            "base"]
+        terminate_after_contacts_on = ["base", "thigh"]
         self_collisions = 1 # 1 to disable, 0 to enable...bitwise filter
         # flip_visual_attachments = False
   
@@ -102,7 +101,10 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
 
     class rewards( LeggedRobotCfg.rewards ):
         soft_dof_pos_limit = 0.9
+        soft_dof_vel_limit = 0.8
+        soft_torque_limit = 0.8
         base_height_target = 0.25
+
         class scales( LeggedRobotCfg.rewards.scales ):
             termination = 0.0
             tracking_lin_vel = 1.5 * 1. / (.005 * 6)
@@ -118,7 +120,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
             collision = 0.0
             feet_stumble = 0.0
             action_rate = 0.0
-            stand_still = 0.0
+            stand_still = -1.0
             dof_pos_limits = 0.0
 
     class commands:
@@ -128,7 +130,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         resampling_time = 10.
         heading_command = False
         class ranges:
-            lin_vel_x = [-0.5, 1.0] # min max [m/s]
+            lin_vel_x = [-0.2, 0.5] # min max [m/s]
             lin_vel_y = [-0.2, 0.2]   # min max [m/s]
             ang_vel_yaw = [-1.57, 1.57]    # min max [rad/s]
             heading = [-3.14, 3.14]
