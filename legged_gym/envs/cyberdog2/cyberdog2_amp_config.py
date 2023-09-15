@@ -63,7 +63,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         stiffness = {'joint': 20.}  # [N*m/rad]
         damping = {'joint': 0.5}     # [N*m*s/rad]
         # action scale: target angle = actionScale * action + defaultAngle
-        action_scale = 0.25
+        action_scale = 0.2
         # decimation: Number of control action updates @ sim DT per policy DT
         decimation = 4
 
@@ -76,28 +76,28 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         self_collisions = 1 # 1 to disable, 0 to enable...bitwise filter
         # flip_visual_attachments = False
   
-    # class domain_rand:
-    #     randomize_friction = True
-    #     friction_range = [0.25, 1.75]
-    #     randomize_base_mass = True
-    #     added_mass_range = [-1., 1.]
-    #     push_robots = True
-    #     push_interval_s = 15
-    #     max_push_vel_xy = 1.0
-    #     randomize_gains = True
-    #     stiffness_multiplier_range = [0.9, 1.1]
-    #     damping_multiplier_range = [0.9, 1.1]
+    class domain_rand:
+        randomize_friction = True
+        friction_range = [0.25, 1.75]
+        randomize_base_mass = True
+        added_mass_range = [-1., 1.]
+        push_robots = True
+        push_interval_s = 15
+        max_push_vel_xy = 1.0
+        randomize_gains = True
+        stiffness_multiplier_range = [0.9, 1.1]
+        damping_multiplier_range = [0.9, 1.1]
 
-    # class noise:
-    #     add_noise = True
-    #     noise_level = 1.0 # scales other values
-    #     class noise_scales:
-    #         dof_pos = 0.03
-    #         dof_vel = 1.5
-    #         lin_vel = 0.1
-    #         ang_vel = 0.3
-    #         gravity = 0.05
-    #         height_measurements = 0.1
+    class noise:
+        add_noise = True
+        noise_level = 1.0 # scales other values
+        class noise_scales:
+            dof_pos = 0.03
+            dof_vel = 1.5
+            lin_vel = 0.1
+            ang_vel = 0.3
+            gravity = 0.05
+            height_measurements = 0.1
 
     class rewards( LeggedRobotCfg.rewards ):
         soft_dof_pos_limit = 0.9
@@ -116,7 +116,7 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
             dof_vel = 0.0
             dof_acc = 0.0
             base_height = 0.0
-            feet_air_time =  0.0
+            feet_air_time =  0.8
             collision = 0.0
             feet_stumble = 0.0
             action_rate = 0.0
@@ -130,9 +130,9 @@ class Cyberdog2AMPCfg( LeggedRobotCfg ):
         resampling_time = 10.
         heading_command = False
         class ranges:
-            lin_vel_x = [-0.2, 0.5] # min max [m/s]
-            lin_vel_y = [-0.2, 0.2]   # min max [m/s]
-            ang_vel_yaw = [-1.57, 1.57]    # min max [rad/s]
+            lin_vel_x = [-1.0, 2.0] # min max [m/s]
+            lin_vel_y = [-1.0, 1.0]   # min max [m/s]
+            ang_vel_yaw = [-1.5, 1.5]    # min max [rad/s]
             heading = [-3.14, 3.14]
 
     # class sim( LeggedRobotCfg.sim ):
