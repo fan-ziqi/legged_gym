@@ -55,13 +55,9 @@ def play(args):
     train_cfg.runner.amp_num_preload_transitions = 1
 
     env_cfg.sim.physx.max_gpu_contact_pairs = 2**23 # Prevent GPU memory from exceeding
-    env_cfg.commands.ranges.lin_vel_x = [1.0, 2.0] # min max [m/s]
-    env_cfg.commands.ranges.lin_vel_y = [-0.0, 0.0]   # min max [m/s]
-    env_cfg.commands.ranges.ang_vel_yaw = [-0.0, 0.0]    # min max [rad/s]
-    env_cfg.commands.ranges.heading = [-3.14, 3.14]
-    # env_cfg.commands.ranges.lin_vel_x = [-2.0, 5.0] # min max [m/s]
-    # env_cfg.commands.ranges.lin_vel_y = [-2.0, 2.0]   # min max [m/s]
-    # env_cfg.commands.ranges.ang_vel_yaw = [-2.0, 2.0]    # min max [rad/s]
+    # env_cfg.commands.ranges.lin_vel_x = [1.0, 2.0] # min max [m/s]
+    # env_cfg.commands.ranges.lin_vel_y = [-0.0, 0.0]   # min max [m/s]
+    # env_cfg.commands.ranges.ang_vel_yaw = [-0.0, 0.0]    # min max [rad/s]
     # env_cfg.commands.ranges.heading = [-3.14, 3.14]
     env_cfg.commands.heading_command = False
 
@@ -80,24 +76,23 @@ def play(args):
         print('Exported policy as jit script to: ', path)
 
     camera_rot = 0
-    # camera_rot_per_sec = np.pi / 6
-    camera_rot_per_sec = 0
+    camera_rot_per_sec = np.pi / 6
     img_idx = 0
 
-    video_duration = 21
+    video_duration = 10
     num_frames = int(video_duration / env.dt)
     print(f'gathering {num_frames} frames')
     video = None
 
     for i in range(num_frames):
         actions = policy(obs.detach())
-        # obs, _, _, _, infos, _, _ = env.step(actions.detach())
-        obs, _, rews, dones, infos = env.step(actions.detach())
+        obs, _, _, _, infos, _, _ = env.step(actions.detach())
+        # obs, _, rews, dones, infos = env.step(actions.detach())
 
         # Reset camera position.
         look_at = np.array(env.root_states[0, :3].cpu(), dtype=np.float64)
         camera_rot = (camera_rot + camera_rot_per_sec * env.dt) % (2 * np.pi)
-        camera_relative_position = 5 * np.array([np.cos(camera_rot), np.sin(camera_rot), 0.6])
+        camera_relative_position = 2 * np.array([np.cos(camera_rot), np.sin(camera_rot), 0.45])
         env.set_camera(look_at + camera_relative_position, look_at)
 
         if RECORD_FRAMES:
