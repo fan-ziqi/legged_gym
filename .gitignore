@@ -61,3 +61,5 @@ __pycache__
 #keti1
 keti1
 go1
+*.csv
+*.zip
